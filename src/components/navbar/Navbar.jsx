@@ -1,22 +1,20 @@
-// components/Navbar.jsx
-import styles from "./navbar.module.css"
 import React from 'react';
 import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <nav className=" pt-7 pb-7">
-      <div className="container flex items-center  ml-44 mr-44">
+    <nav className="pt-2 pb-2 text-indigo-800 sticky top-0 bg-white">
+      <div className="flex space-x-9 ml-44 mr-44 items-center">
         {/* Logo and Name */}
-        <div className="flex items-center">
-          <img src="/yaleFiesta.svg" alt="yF Logo" className="mr-2" style={{ width: '72px', height: '72px' }} />
+        <div className="flex items-center flex-1">
+          <img src="/yaleFiesta.svg" alt="yF Logo" className="mr-2" style={{ width: '75px', height: '75px' }} />
           <Link href="/">
-            <span className=" text-indigo-800 font-bold text-3xl cursor-pointer">yaleFiesta</span>
+            <span className="font-bold text-2xl cursor-pointer">yaleFiesta</span>
           </Link>
         </div>
 
         {/* Navigation Links */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 flex-1">
           <NavLink href="/">HOME</NavLink>
           <NavLink href="/about">ABOUT</NavLink>
           <NavLink href="/speakers">SPEAKERS</NavLink>
@@ -27,7 +25,7 @@ const Navbar = () => {
 
         {/* Login Button */}
         <Link href="/login">
-          <span className="text-indigo-800 cursor-pointer">login</span>
+          <span className="cursor-pointer items-end flex-1 text-xl">login</span>
         </Link>
       </div>
     </nav>
@@ -37,7 +35,7 @@ const Navbar = () => {
 const NavLink = ({ href, children }) => {
   return (
     <Link href={href}>
-      <span className="text-indigo-800 hover:underline cursor-pointer text-xl">{children}</span>
+      <span className="hover:underline cursor-pointer text-md flex-1">{children}</span>
     </Link>
   );
 };

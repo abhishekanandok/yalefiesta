@@ -1,4 +1,5 @@
 import React from 'react';
+import ScheduleEvent from "@/components/sheduleEvent/shedule";
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
         Join us for an amazing festival experience filled with hackathons, dancing, debates, kabaddi, cricket, singing, and more!
       </p>
       {/* Add more sections and content as needed */}
+      <ScheduleEvent/>
     </div>
   );
 };
