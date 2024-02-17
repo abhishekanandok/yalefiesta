@@ -1,9 +1,9 @@
 import React from 'react'
 
-const gallery = () => {
+const gallary = () => {
   return (
-    <div>gallery</div>
+    <div>gallary</div>
   )
 }
 
-export default gallery
+export default gallary
