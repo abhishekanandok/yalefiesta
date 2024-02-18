@@ -33,7 +33,7 @@ const Navbar = () => {
           <NavLink href="/blog">BLOG</NavLink>
 
           <NavLinkWithDropdown title="ABOUT" href="/about">
-            <DropdownItem href="/about/aboutus">About Us</DropdownItem>
+            <DropdownItem href="/about">About Us</DropdownItem>
             <DropdownItem href="/about/gallery">Gallery</DropdownItem>
             <DropdownItem href="/about/faq">FAQ</DropdownItem>
             <DropdownItem href="/about/sponsors">Sponsors</DropdownItem>
