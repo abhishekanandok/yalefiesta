@@ -1,9 +1,14 @@
-import React from 'react'
+import styles from "./signup.module.css";
+import SignupForm from "@/components/signupForm/signupForm";
 
-const signup = () => {
+const SignupPage = () => {
   return (
-    <div>signup</div>
-  )
-}
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <SignupForm/>
+      </div>
+    </div>
+  );
+};
 
-export default signup
+export default SignupPage;

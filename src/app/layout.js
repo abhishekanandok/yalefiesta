@@ -8,17 +8,17 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
     title: {
-        default: "yaleFiesta",
+        default: "yaleFiesta | Purnea College of Engineering",
         template: "%s | yaleFiesta"
     },
-    description: "yaleFiesta | A college fest Website",
+    description: "Purnea College of Engineering fest & event Website",
 };
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={inter.className}>
-                <div>
+                <div className=" flex flex-col min-h-screen justify-between">
                  <Navbar />
                     {children}
                  <Footer/>   
