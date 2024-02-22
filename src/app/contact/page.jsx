@@ -1,4 +1,3 @@
-// components/ContactUsPage.js
 import React from 'react';
 import './ContactUsPage.css'; // Import the CSS for styling
 import Image from 'next/image'
