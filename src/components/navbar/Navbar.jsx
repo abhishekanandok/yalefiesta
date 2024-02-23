@@ -44,7 +44,7 @@ const Navbar = () => {
 
         {/* Login Button */}
         <CustomLink href="/login">
-          <span className="cursor-pointer items-end flex-1 text-xl">login</span>
+          <span className="cursor-pointer items-end flex-1 text-xl  bg-blue-900 hover:bg-blue-500 text-white p-1 pl-3 pr-3 rounded-lg">LOGIN</span>
         </CustomLink>
       </div>
     </nav>
