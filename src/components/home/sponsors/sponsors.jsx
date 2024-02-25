@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 const sponsors = () => {
   return (
-    <div className=' backdrop-blur-sm bg-white/30 text-center'>
+    <div className=' backdrop-blur-sm bg-white/30 text-center p-20'>
       
       <Image
                 src="/copy_image/book_seat_img.jpg"
