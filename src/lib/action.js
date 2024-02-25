@@ -140,7 +140,7 @@ export const login = async (prevState, formData) => {
   } catch (err) {
     console.log(err);
 
-    if (err.message.includes("CredentialsSignin")) {
+    if (err) {
       return { error: "Invalid username or password" };
     }
     throw err;
