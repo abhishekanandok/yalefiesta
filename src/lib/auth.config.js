@@ -27,9 +27,9 @@ export const authConfig = {
   
         // ONLY ADMIN CAN REACH THE ADMIN DASHBOARD
   
-        if (isOnAdminPanel && !user?.isAdmin) {
-          return false;
-        }
+        // if (isOnAdminPanel && !user?.isAdmin) {
+        //   return false;
+        // }
   
         // ONLY AUTHENTICATED USERS CAN REACH THE BLOG PAGE
   
