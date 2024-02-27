@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { handleLogout } from "@/lib/action";
 
 const Navbar = () => {
   return (
@@ -46,6 +47,9 @@ const Navbar = () => {
         <CustomLink href="/login">
           <span className="cursor-pointer items-end flex-1 text-xl  bg-blue-900 hover:bg-blue-500 text-white p-1 pl-3 pr-3 rounded-lg">LOGIN</span>
         </CustomLink>
+        <form action={handleLogout}>
+              <button >Logout</button>
+        </form>
       </div>
     </nav>
   );
