@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
     },
     img: {
       type: String,
+      //use cloudinaray
     },
     isAdmin: {
       type: Boolean,
