@@ -18,14 +18,10 @@ const SignupForm = () => {
 
   return (
     <form className={styles.form} action={formAction}>
-      <input type="text" placeholder="username" name="username" />
-      <input type="email" placeholder="email" name="email" />
-      <input type="password" placeholder="password" name="password" />
-      <input
-        type="password"
-        placeholder="password again"
-        name="passwordRepeat"
-      />
+      <input type="text" placeholder="username" name="username" required/>
+      <input type="email" placeholder="email" name="email" required/>
+      <input type="password" placeholder="password" name="password" required/>
+      <input type="password" placeholder="password again" name="passwordRepeat" required/>
       <button>Register</button>
       {state?.error}
       <Link href="/login">

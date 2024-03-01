@@ -2,26 +2,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
   
   .wrapper{
     width: 500px;
-    background-color:rgb(57, 109, 92);
+    background-color:rgba(206, 40, 106, 0.836);
     padding: 50px;
     display: flex;
     flex-direction: column;
     text-align: center;
     gap: 30px;
-    border-radius: 5px;
-  }
-  
-  .github{
-    width: 100%;
-    padding: 20px;
-    cursor: pointer;
-    background-color: #fff;
-    color: #000;
-    font-weight: bold;
-    border: none;
     border-radius: 5px;
   }

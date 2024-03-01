@@ -2,11 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 40px;
   }
   
   .wrapper{
     width: 500px;
-    background-color:aqua;
+    background-color:rgba(206, 40, 106, 0.836);
     padding: 50px;
     display: flex;
     flex-direction: column;

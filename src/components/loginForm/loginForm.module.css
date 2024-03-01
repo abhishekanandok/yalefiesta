@@ -7,8 +7,8 @@
   
   .form input{
     padding: 20px;
-    background-color: black;
-    color: wheat;
+    background-color: white;
+    color: black;
     border: none;
     border-radius: 5px;
   }
@@ -17,7 +17,7 @@
     padding: 20px;
     cursor: pointer;
     background-color: black;
-    color: wheat;
+    color: white;
     font-weight: bold;
     border: none;
     border-radius: 5px;
