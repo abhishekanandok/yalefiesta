@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { handleLogout } from "@/lib/action";
+import { ModeToggle } from "@/components/darkMode"
 
 const Navbar = () => {
   return (
@@ -42,6 +43,8 @@ const Navbar = () => {
           </NavLinkWithDropdown>
           <NavLink href="/contact">CONTACT</NavLink>
         </div>
+
+        <ModeToggle/>
 
         {/* Login Button */}
         <CustomLink href="/login">

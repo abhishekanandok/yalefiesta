@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { Post, User } from "../models/user";
-import { connectToDb } from "./utils";
+import { connectToDb } from "./connectToDb";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcryptjs";
 

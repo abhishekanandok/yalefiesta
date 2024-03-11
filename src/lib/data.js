@@ -1,5 +1,5 @@
 import { Post, User } from "../models/user";
-import { connectToDb } from "./utils";
+import { connectToDb } from "./connectToDb";
 import { unstable_noStore as noStore } from "next/cache";
 
 // TEMPORARY DATA
