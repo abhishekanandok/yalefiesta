@@ -1,3 +1,5 @@
+//this file used for shadcn UI
+
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 

@@ -10,7 +10,7 @@ const Footer = () => {
           <h2 className="text-2xl font-bold mb-4">Subscribe to our newsletter</h2>
           <p>Enter your email here</p>
           {/* Add your subscription form or button here */}
-          <input type="email" placeholder="Your email" className="border p-2 mr-2" />
+          <input id='email' type="email" placeholder="Your email" className="border p-2 mr-2" autoComplete="off"/>
           <button className="bg-blue-500 text-white px-4 py-2 rounded">Subscribe</button>
         </div>
 
