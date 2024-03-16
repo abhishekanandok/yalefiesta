@@ -106,10 +106,14 @@ export const register = async (previousState, formData) => {
   try {
     connectToDb();
 
-    const user = await User.findOne({ username });
+    const userName = await User.findOne({ username });
+    const userEmail = await User.findOne({ email });
 
-    if (user) {
+    if (userName) {
       return { error: "Username already exists" };
+    }
+    if (userEmail) {
+      return { error: "User already exists with this email" };
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -137,16 +141,23 @@ export const register = async (previousState, formData) => {
 
 
 export const login = async (prevState, formData) => {
-  const { username, password } = Object.fromEntries(formData);
+  const { email, password } = formData;
 
   try {
-    await signIn("credentials", { username, password });
-  } catch (err) {
-    console.log(err);
-
-    if (err) {
-      return { error: "Invalid username or password" };
+    connectToDb();
+    const user = await User.findOne({ email });
+    if (!user) {
+      return { error: "Account doesn't exists" };
     }
-    throw err;
+    await signIn("credentials", { email, password });
+
+  } catch (err) {
+    // console.log(err);
+    if (!err.message.includes("NEXT_REDIRECT")) {
+      return { error: "Invalid username or password" };
+    }else{
+      return { success: true };
+    }
+    // throw err;
   }
 };

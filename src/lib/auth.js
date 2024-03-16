@@ -5,23 +5,24 @@ import { User } from "../models/user";
 import bcrypt from "bcryptjs";
 import { authConfig } from "./auth.config";
 
+
+
 const login = async (credentials) => {
   try {
     connectToDb();
-    const user = await User.findOne({ username: credentials.username });
+    const user = await User.findOne({ email: credentials.email });
 
-    if (!user) throw new Error("Wrong credentials!");
+    if (!user) throw new Error("Account doest't exists");
 
     const isPasswordCorrect = await bcrypt.compare(
       credentials.password,
       user.password
     );
-
     if (!isPasswordCorrect) throw new Error("Wrong credentials!");
-
     return user;
+
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     throw new Error("Failed to login!");
   }
 };
@@ -47,7 +48,7 @@ export const {
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log(profile);
+      // console.log(profile);
       return true;
     },
     ...authConfig.callbacks,

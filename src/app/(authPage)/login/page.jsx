@@ -1,13 +1,12 @@
 import LoginForm from "@/components/loginForm/loginForm";
-import styles from "./login.module.css";
+
 
 const LoginPage = () => {
 
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <LoginForm />
-      </div>
+    <div className="grid justify-items-center py-2">
+      <h1 className=" font-semibold text-xl p-1">Login Here</h1>
+      <LoginForm />
     </div>
   );
 };

@@ -273,7 +273,7 @@ const NavbarLinks =  ({session, userData}) => {
         ) : (
           <div>
             <Link href="/login">
-              <Button>Login</Button>
+              <Button className=' font-bold'>Login</Button>
             </Link>
           </div>
         )}
