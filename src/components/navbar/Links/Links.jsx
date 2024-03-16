@@ -228,27 +228,27 @@ const NavbarLinks =  ({session, userData}) => {
               </Avatar></DropdownMenuTrigger>
 
               <DropdownMenuContent className="w-52">
-                <DropdownMenuLabel>Hi, {userData.name}</DropdownMenuLabel>
+                <DropdownMenuLabel><span className=' font-light'>Hi,</span> {userData.firstName} {userData.lastName}</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
 
                 <DropdownMenuGroup>
 
-                  <Link href={`/${userData.name}/profile`}>
+                  <Link href={`/${userData.username}/profile`}>
                   <DropdownMenuItem className=' cursor-pointer'>
                   <CgProfile className="mr-2 h-4 w-4" />Profile
                     <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   </Link>
 
-                  <Link href={`/${userData.name}/dashboard`}>
+                  <Link href={`/${userData.username}/dashboard`}>
                   <DropdownMenuItem className=' cursor-pointer'>
                     <RxDashboard className="mr-2 h-4 w-4" />Dashboard
                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   </Link>
 
-                  <Link href={`/${userData.name}/dashboard/setting`} >
+                  <Link href={`/${userData.username}/dashboard/setting`} >
                   <DropdownMenuItem className=' cursor-pointer'>
                   <IoSettingsOutline className="mr-2 h-4 w-4" />Settings
                     <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>

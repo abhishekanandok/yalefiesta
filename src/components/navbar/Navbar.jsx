@@ -7,14 +7,16 @@ const Navbar = async () => {
 
   // Check if user is authenticated
   const session = await auth();
+  
   if (session?.user) {
     // If authenticated, fetch user details
     user = await getUser(session.user.id);
+    // console.log(user);
   }
 
   return (
     <>
-      <NavbarLinks session={session} userData={user ? { name: user.username, img: user.img } : null} />
+      <NavbarLinks session={session} userData={user ? {firstName: user.firstName, lastName: user.lastName, username: user.username, img: user.img } : null} />
     </>
   )
 }
