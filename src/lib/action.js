@@ -91,11 +91,15 @@ export const handleLogout = async () => {
   await signOut();
 };
 
-export const register = async (previousState, formData) => {
-  const { username, email, password, img, passwordRepeat } =
-    Object.fromEntries(formData);
 
-  if (password !== passwordRepeat) {
+
+
+export const register = async (previousState, formData) => {
+  console.log(formData);
+  const { firstName, lastName, username, email, password, img, confirmPassword } =
+    formData;
+
+  if (password !== confirmPassword) {
     return { error: "Passwords do not match" };
   }
 
@@ -112,6 +116,8 @@ export const register = async (previousState, formData) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
+      firstName,
+      lastName,
       username,
       email,
       password: hashedPassword,
@@ -127,6 +133,8 @@ export const register = async (previousState, formData) => {
     return { error: "Something went wrong!" };
   }
 };
+
+
 
 export const login = async (prevState, formData) => {
   const { username, password } = Object.fromEntries(formData);

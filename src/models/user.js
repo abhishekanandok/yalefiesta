@@ -2,11 +2,19 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
     username: {
       type: String,
       required: true,
       unique: true,
-      min: 3,
+      min: 5,
       max: 20,
     },
     email: {
@@ -17,7 +25,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
     },
     img: {
       type: String,
@@ -27,9 +35,43 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isSponser: {
+      type: Boolean,
+      default: false,
+    },
+    isCR: {
+      type: Boolean,
+      default: false,
+    },
+    isCoordinator: {
+      type: Boolean,
+      default: false,
+    },
+    collegeName: {
+      type: String,
+    },
+    branch: {
+      type: String,
+    },
+    collegeID: {
+      type: Number,
+      max: 20,
+    },
+    sessionYear: {
+      type: Number,
+      min: 6,
+      max: 6,
+    },
   },
   { timestamps: true }
 );
+
+
+
+
+
+
+
 
 const postSchema = new mongoose.Schema(
   {

@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import { Toaster } from "@/components/ui/toaster"
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,8 +29,10 @@ export default function RootLayout({ children }) {
                 <div className=" flex flex-col min-h-screen justify-between">
                  <Navbar />
                     {children}
-                 <Footer/>   
+                 <Footer/>
+                 
                 </div>
+                <Toaster />
                 </ThemeProvider>
             </body>
         </html>

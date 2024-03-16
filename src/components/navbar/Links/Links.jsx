@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { IoMdLogOut } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
-import { CiSettings } from "react-icons/ci";
+import { IoSettingsOutline } from "react-icons/io5";
 import { RxDashboard } from "react-icons/rx";
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons';
 
@@ -235,22 +235,22 @@ const NavbarLinks =  ({session, userData}) => {
                 <DropdownMenuGroup>
 
                   <Link href={`/${userData.name}/profile`}>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className=' cursor-pointer'>
                   <CgProfile className="mr-2 h-4 w-4" />Profile
                     <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   </Link>
 
                   <Link href={`/${userData.name}/dashboard`}>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className=' cursor-pointer'>
                     <RxDashboard className="mr-2 h-4 w-4" />Dashboard
                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   </Link>
 
-                  <Link href={`/${userData.name}/dashboard/setting`}>
-                  <DropdownMenuItem>
-                    <CiSettings className="mr-2 h-4 w-4" />Settings
+                  <Link href={`/${userData.name}/dashboard/setting`} >
+                  <DropdownMenuItem className=' cursor-pointer'>
+                  <IoSettingsOutline className="mr-2 h-4 w-4" />Settings
                     <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   </Link>
