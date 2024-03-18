@@ -15,7 +15,7 @@ const UserProfile_edit = async ({ params }) => {
 
 
   return (
-    <div className="py-2 px-8 mb-8 relative">
+    <div className="py-2 px-8 mb-8">
       <h1 className="text-xl font-bold mb-4 underline underline-offset-2">Edit Profile</h1>
       <div className=' flex'>
         <div className=' flex flex-col pr-4 gap-2'>
@@ -41,7 +41,7 @@ const UserProfile_edit = async ({ params }) => {
         <div className=' bg-slate-200 h-52 w-52 ml-14 rounded-full border-double border-4 border-pink-500 shadow-lg shadow-pink-500/50'></div>
       </div>
 
-      <Button className=' absolute bottom-0 left-0 ml-8'>
+      <Button className=' mt-14'>
         <Link href={`/${params.userID}/profile`}>
           <span className="flex gap-2 items-center"><IoSaveOutline className='h-5 w-5' />Save</span>
         </Link>
