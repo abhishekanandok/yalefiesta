@@ -2,15 +2,45 @@
 
 import { revalidatePath } from "next/cache";
 import { Post, User } from "../models/user";
+import { Event } from "../models/event";
 import { connectToDb } from "./connectToDb";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcryptjs";
 
-export const addPost = async (prevState,formData) => {
-  // const title = formData.get("title");
-  // const desc = formData.get("desc");
-  // const slug = formData.get("slug");
 
+
+export const addEvent = async (prevState,formData) => {
+  const { title, description, eventRules, tags, category, eventDate, eventVenue, eventPrize, sponsors, linkPdf, linkImg, team } = formData;
+
+  try {
+    connectToDb();
+    const newEvent = new Event({
+      title,
+      description,
+      eventRules,
+      tags,
+      category,
+      eventDate,
+      eventVenue,
+      eventPrize,
+      sponsors,
+      linkPdf,
+      linkImg,
+      team,
+    });
+
+    await newEvent.save();
+    console.log("saved to db");
+    return { success: true };
+    
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
+};
+
+
+export const addPost = async (prevState,formData) => {
   const { title, desc, slug, userId } = Object.fromEntries(formData);
 
   try {
@@ -32,6 +62,7 @@ export const addPost = async (prevState,formData) => {
   }
 };
 
+
 export const deletePost = async (formData) => {
   const { id } = Object.fromEntries(formData);
 
@@ -47,6 +78,7 @@ export const deletePost = async (formData) => {
     return { error: "Something went wrong!" };
   }
 };
+
 
 export const addUser = async (prevState,formData) => {
   const { username, email, password, img } = Object.fromEntries(formData);
@@ -68,6 +100,7 @@ export const addUser = async (prevState,formData) => {
     return { error: "Something went wrong!" };
   }
 };
+
 
 export const deleteUser = async (formData) => {
   const { id } = Object.fromEntries(formData);
@@ -92,10 +125,8 @@ export const handleLogout = async () => {
 };
 
 
-
-
 export const register = async (previousState, formData) => {
-  console.log(formData);
+  // console.log(formData);
   const { firstName, lastName, username, email, password, img, confirmPassword } =
     formData;
 
@@ -137,7 +168,6 @@ export const register = async (previousState, formData) => {
     return { error: "Something went wrong!" };
   }
 };
-
 
 
 export const login = async (prevState, formData) => {

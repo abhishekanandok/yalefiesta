@@ -20,7 +20,7 @@ import {
 
 export default function CommandDemo({ params }) {
   return (
-    <div className="py-2 px-8 mb-8 relative">
+    <div className="py-2 px-5 mb-8 relative">
       <h1 className="text-xl font-bold mb-4 underline underline-offset-2">Dashboard</h1>
       <h2>Username:- {params.userID}</h2>
       <Command className="rounded-lg border shadow-md">

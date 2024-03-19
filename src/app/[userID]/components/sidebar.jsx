@@ -9,14 +9,22 @@ import { MdOutlinePostAdd } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { GrGallery } from "react-icons/gr";
+import { FaUserSecret } from "react-icons/fa";
+
+
+
+
+
 
 const Sidebar = ({ userID }) => {
   return (
     <div className=' flex ml-9'>
+      
       <div><GiHamburgerMenu className="mr-2 h-8 w-8 sticky top-20"/></div>
-      <div>
-      <nav className="text-indigo-800 min-h-full w-52 p-3  mr-9 mb-5 text-md font-semibold gap-10 border-r-4 border-slate-900/75  shadow-xl">
-      <ul>
+
+      <div className=''>
+      <nav className="text-indigo-800 min-h-full w-52 p-3  mr-4 mb-5 text-md font-semibold gap-10 border-r-4 border-slate-900/75  shadow-xl">
+      <ul className=' sticky top-20'>
 
         <Link href={`/${userID}/profile`}>
           <li className=" rounded-md p-2 m-1 hover:bg-pink-300">
@@ -31,6 +39,11 @@ const Sidebar = ({ userID }) => {
         <Link href={`/${userID}/dashboard/event`}>
           <li className=" rounded-md p-2 m-1 hover:bg-pink-300">
             <span className="flex gap-2 items-center"><MdOutlineCreateNewFolder className="h-5 w-5"/>Create Events</span>
+          </li>
+        </Link>
+        <Link href={`/${userID}/dashboard/applicant`}>
+          <li className=" rounded-md p-2 m-1 hover:bg-pink-300">
+            <span className="flex gap-2 items-center"><FaUserSecret className="h-5 w-5"/>Applicant</span>
           </li>
         </Link>
         <Link href={`/${userID}/dashboard/result`}>
@@ -67,6 +80,7 @@ const Sidebar = ({ userID }) => {
       </ul>
     </nav>
       </div>
+
     </div>
   );
 };

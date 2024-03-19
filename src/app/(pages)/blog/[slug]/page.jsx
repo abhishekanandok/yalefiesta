@@ -17,6 +17,7 @@ const getData = async (slug) => {
 
 export const generateMetadata = async ({ params }) => {
   const { slug } = params;
+  // console.log(slug);
 
   const post = await getPost(slug);
 
@@ -47,7 +48,7 @@ const SinglePostPage = async ({ params }) => {
         <div className={styles.detail}>
           {post && (
             <Suspense fallback={<div>Loading...</div>}>
-              <PostUser userId={post.userId} />
+              {/* <PostUser userId={post.userId} /> */}
             </Suspense>
             // suspance used as a skalaton, before coming data
             

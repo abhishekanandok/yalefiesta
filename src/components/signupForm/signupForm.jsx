@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -83,7 +84,7 @@ const SignUpForm = () => {
         action: <ToastAction altText="Try again"> <a href="/signup">Try again</a> </ToastAction>,
       });
     }
-    
+
   }, [state?.error, state]);
 
 
@@ -137,6 +138,9 @@ const SignUpForm = () => {
                     <FormControl className=' bg-white'>
                       <Input placeholder='@johndoe123' {...field} />
                     </FormControl>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

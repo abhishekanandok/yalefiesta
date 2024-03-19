@@ -15,7 +15,7 @@ const UserProfile_edit = async ({ params }) => {
 
 
   return (
-    <div className="py-2 px-8 mb-8">
+    <div className="py-2 px-5 mb-8">
       <h1 className="text-xl font-bold mb-4 underline underline-offset-2">Edit Profile</h1>
       <div className=' flex'>
         <div className=' flex flex-col pr-4 gap-2'>
