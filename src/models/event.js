@@ -33,6 +33,9 @@ const eventSchema = new mongoose.Schema(
         eventPrize: {
             type: String,
         },
+        regFee: {
+            type: Number,
+        },
         sponsors: {
             type: String,
         },
@@ -48,6 +51,8 @@ const eventSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        //user id 
+        //payment id array
     },
     { timestamps: true }
 );
