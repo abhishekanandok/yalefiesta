@@ -23,7 +23,7 @@ const Sidebar = ({ userID }) => {
       <div><GiHamburgerMenu className="mr-2 h-8 w-8 sticky top-20"/></div>
 
       <div className=''>
-      <nav className="text-indigo-800 min-h-full w-52 p-3  mr-4 mb-5 text-md font-semibold gap-10 border-r-4 border-slate-900/75  shadow-xl">
+      <nav className="text-indigo-800 min-h-full w-52 p-3  mr-4 mb-5 text-md font-semibold gap-10 border-r-4 border-pink-600/75  shadow-xl">
       <ul className=' sticky top-20'>
 
         <Link href={`/${userID}/profile`}>

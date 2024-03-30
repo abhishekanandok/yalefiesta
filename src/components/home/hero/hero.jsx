@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
 
 const Hero = () => {
   return (
@@ -41,8 +42,10 @@ const Hero = () => {
 
         {/* button */}
         <div className=''>
-          <button className=' bg-pink-500 text-white font-bold m-10 p-3 rounded-lg'>JOIN HERE</button>
-          <button className=' font-bold'>+ ADD TO CALENDER </button>
+          <Button size="lg" className='m-10 p-3'>JOIN HERE</Button>
+          {/* <button className=' bg-pink-500 text-white font-bold m-10 p-3 rounded-lg'>JOIN HERE</button> */}
+          <Button size="lg" variant="outline" className=' font-bold'>+ ADD TO CALENDER</Button>
+          {/* <button className=' font-bold'>+ ADD TO CALENDER </button> */}
         </div>
       </div>
 

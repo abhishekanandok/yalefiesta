@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import Link from "next/link";
 import { Suspense } from "react";
 import { FaArrowDown } from "react-icons/fa";
 
@@ -58,7 +59,7 @@ const SingleEventPage = async ({ params }) => {
             <div className="py-5">
             <Button variant={"outline"}><FaArrowDown className=" h-5 w-5 animate-bounce mr-2" />Download Pdf</Button>
             </div>
-            <Button className=" mt-4">Apply</Button>
+            <Link href={`/events/${event._id}/apply`} ><Button className=" mt-4">Apply</Button></Link>
         </div>
     );
 };
