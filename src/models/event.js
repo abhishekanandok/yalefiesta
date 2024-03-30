@@ -51,6 +51,7 @@ const eventSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        
         //user id 
         //payment id array
     },
