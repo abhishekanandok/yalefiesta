@@ -72,6 +72,7 @@ const SingleForm = ({ event, userData }) => {
     const { toast } = useToast()
 
     useEffect(() => {
+        state?.success && router.push("/events");
         if (state?.success) {
             toast({
                 description: "Form submitted succesfully.",

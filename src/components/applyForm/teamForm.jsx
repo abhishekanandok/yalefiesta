@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link';
-import { useEffect } from "react";
-import { useForm } from 'react-hook-form';
-import { addSingleForm } from "@/lib/singleForm";
+import { useEffect, useState } from "react";
+import { useForm, useFieldArray } from 'react-hook-form';
+import { addTeamForm } from "@/lib/teamForm";
 import { cn } from "@/lib/utils"
 import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
@@ -29,22 +29,32 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/components/ui/use-toast"
+import { Label } from '@/components/ui/label';
+import { IoPersonAddOutline } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
 
 
 
-const FormSchema = z
-    .object({
-        eventId: z.string().min(1).max(50),
-        userId: z.string().min(1).max(50),
-        firstName: z.string().min(1, 'firstName are required').max(50),
-        lastName: z.string().min(1, 'lastName are required').max(50),
-        email: z.string().min(1, 'Email is required').email('Invalid email'),
-        mobileNo: z.string().min(10, 'give correct number').max(10, 'give correct number'),
-        college: z.string().min(3).max(100),
-        session: z.string().min(1, 'session is required').max(20, 'put in correct formate'),
-        branch: z.string().min(1).max(100),
-        fee: z.number().nonnegative(),
-    });
+
+
+const FormSchema = z.object({
+    eventId: z.string().min(1).max(50),
+    userId: z.string().min(1).max(50),
+    teamName: z.string().min(1, 'Team name is required').max(50),
+    leaderName: z.string().min(1, 'Leader name is required').max(50),
+    email: z.string().min(1, 'Email is required').email('Invalid email'),
+    mobileNo: z.string().min(10, 'Mobile number must be 10 digits').max(10, 'Mobile number must be 10 digits'),
+    altMobileNo: z.string().optional(),
+    college: z.string().min(3, 'college name required').max(100),
+    fee: z.number().nonnegative(),
+    teamMembers: z.array(z.object({
+        name: z.string().min(1, 'Name is required'),
+        session: z.string().min(1, 'Session is required'),
+        branch: z.string().min(1, 'Branch is required'),
+    })),
+});
+
+
 
 
 
@@ -54,50 +64,61 @@ const SingleForm = ({ event, userData }) => {
         defaultValues: {
             eventId: event._id,
             userId: userData.userId,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
+            teamName: '',
+            leaderName: '',
             email: userData.email,
             mobileNo: '',
+            altMobileNo: '',
             college: '',
-            session: '',
-            branch: '',
             fee: 0,
+            teamMembers: [{ name: '', session: '', branch: '' }],
         },
     });
 
-    
-    const [state, formAction] = useFormState(addSingleForm, undefined);
-
-    // const router = useRouter();
-    // const { toast } = useToast()
-
-    // useEffect(() => {
-    //     if (state?.success) {
-    //         toast({
-    //             description: "Form submitted succesfully.",
-    //         });
-    //     }
-    // }, [state?.success, state]);
+    const { control } = form;
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: 'teamMembers',
+    });
 
 
+    const [state, formAction] = useFormState(addTeamForm, undefined);
+    const router = useRouter();
+    const { toast } = useToast()
+
+    useEffect(() => {
+        state?.success && router.push("/events");
+        if (state?.success) {
+            toast({
+                description: "Form submitted succesfully.",
+            });
+        }
+    }, [state?.success, state]);
+
+    //form data here
     const onSubmit = (values) => {
-        // formAction(values);
-        console.log(values);
+        // console.log(values);
+        formAction(values);
     };
 
 
+
+    const addMember = () => {
+        append({ name: '', session: '', branch: '' });
+    };
+
+    const removeMember = (index) => {
+        remove(index);
+    };
+
     return (
-        <div className="py-2 mb-8 px-48">
+        <div className="py-2 mb-8 px-12">
             <h1 className="text-xl font-semibold mb-4 underline underline-offset-2">Register Team</h1>
-
-
             <Form {...form} >
                 <div className=' bg-slate-100 p-5 rounded-xl'>
                     <div>
                         <form onSubmit={form.handleSubmit(onSubmit)} className=''>
                             <div className='space-y-2'>
-
-                                {/* Event id */}
                                 <FormField
                                     control={form.control}
                                     name='eventId'
@@ -111,8 +132,6 @@ const SingleForm = ({ event, userData }) => {
                                         </FormItem>
                                     )}
                                 />
-
-                                {/* user id */}
                                 <FormField
                                     control={form.control}
                                     name='userId'
@@ -126,39 +145,32 @@ const SingleForm = ({ event, userData }) => {
                                         </FormItem>
                                     )}
                                 />
-
-
-                                {/* Name */}
-                                <div className=" flex gap-5">
-                                    <FormField
-                                        control={form.control}
-                                        name='firstName'
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">First Name</FormLabel>
-                                                <FormControl className=' bg-white'>
-                                                    <Input {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                    <FormField
-                                        control={form.control}
-                                        name='lastName'
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">Last Name</FormLabel>
-                                                <FormControl className=' bg-white'>
-                                                    <Input {...field} />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-
-                                {/* email */}
+                                <FormField
+                                    control={form.control}
+                                    name='teamName'
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">Team Name</FormLabel>
+                                            <FormControl className=' bg-white'>
+                                                <Input placeholder='ex- team flex' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name='leaderName'
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">Leader Name</FormLabel>
+                                            <FormControl className=' bg-white'>
+                                                <Input placeholder='ex- john dev' {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                                 <FormField
                                     control={form.control}
                                     name='email'
@@ -172,8 +184,6 @@ const SingleForm = ({ event, userData }) => {
                                         </FormItem>
                                     )}
                                 />
-
-                                {/* mobile no */}
                                 <FormField
                                     control={form.control}
                                     name='mobileNo'
@@ -190,9 +200,70 @@ const SingleForm = ({ event, userData }) => {
                                         </FormItem>
                                     )}
                                 />
-
-
-                                {/*select college */}
+                                <FormField
+                                    control={form.control}
+                                    name='altMobileNo'
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel >Alternate Mobile No.</FormLabel>
+                                            <div className=" flex gap-1">
+                                                <p className=" text-center text-md pt-1">+91</p>
+                                                <FormControl className=' bg-white'>
+                                                    <Input className="max-w-48" placeholder='ex- 1234567890' {...field} />
+                                                </FormControl>
+                                            </div>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <div>
+                                    <Label>Member Details:-</Label>
+                                    {fields.map((member, index) => (
+                                        <div className=' flex gap-2' key={member.id}>
+                                            <FormField
+                                                control={form.control}
+                                                name={`teamMembers.${index}.name`}
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">Name</FormLabel>
+                                                        <FormControl className=' bg-white'>
+                                                            <Input placeholder='ex- Tejmay Anand' {...field} />
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={form.control}
+                                                name={`teamMembers.${index}.session`}
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">Session</FormLabel>
+                                                        <FormControl className=' bg-white'>
+                                                            <Input placeholder='ex -2022-26' {...field} />
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={form.control}
+                                                name={`teamMembers.${index}.branch`}
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">Branch</FormLabel>
+                                                        <FormControl className=' bg-white'>
+                                                            <Input placeholder='ex- CSE' {...field} />
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <Button className=' mt-8' variant="outline" size="icon" type="button" onClick={() => removeMember(index)}><MdDelete className='h-5 w-5' /></Button>
+                                        </div>
+                                    ))}
+                                    <Button className=' mt-2 ml-2' size="sm" type="button" onClick={addMember}><IoPersonAddOutline /> Add</Button>
+                                </div>
                                 <FormField
                                     control={form.control}
                                     name="college"
@@ -218,46 +289,12 @@ const SingleForm = ({ event, userData }) => {
                                                     <SelectItem value="GAYA COLLEGE OF ENGINEERING, GAYA">GAYA COLLEGE OF ENGINEERING, GAYA</SelectItem>
                                                     <SelectItem value="BHAGALPUR COLLEGE OF ENGINEERING, BHAGALPUR">BHAGALPUR COLLEGE OF ENGINEERING, BHAGALPUR</SelectItem>
                                                     <SelectItem value="other">Other</SelectItem>
-                                        
-                                                    
                                                 </SelectContent>
                                             </Select>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
-
-                                {/* Session */}
-                                <FormField
-                                    control={form.control}
-                                    name='session'
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">Session</FormLabel>
-                                            <FormControl className=' bg-white'>
-                                                <Input placeholder='ex -2022-26' {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                {/* Branch */}
-                                <FormField
-                                    control={form.control}
-                                    name='branch'
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">Branch</FormLabel>
-                                            <FormControl className=' bg-white'>
-                                                <Input placeholder='ex- CSE' {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                {/* Reg. Fee */}
                                 <FormField
                                     control={form.control}
                                     name='fee'
@@ -271,8 +308,6 @@ const SingleForm = ({ event, userData }) => {
                                         </FormItem>
                                     )}
                                 />
-
-
                             </div>
                             <Button size="lg" className=' ml-1 mt-6' type='submit'>
                                 SUBMIT
@@ -281,11 +316,8 @@ const SingleForm = ({ event, userData }) => {
                     </div>
                 </div>
             </Form>
-
         </div>
     )
 }
-
-
 
 export default SingleForm;

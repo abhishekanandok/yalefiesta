@@ -1,50 +1,25 @@
 import mongoose from "mongoose";
 
-const singleFormSchema = new mongoose.Schema(
-    {
-        firstName: {
-            type: String,
-            required: true,
-        },
-        lastName: {
-            type: String,
-            required: true,
-        },
-        email: {
-            type: String,
-            required: true,
-        },
-        mobileNo: {
-            type: String,
-            required: true,
-        },
-        college: {
-            type: String,
-            required: true,
-        },
-        session: {
-            type: String,
-            required: true,
-        },
-        branch: {
-            type: String,
-            required: true,
-        },
-        eventId: {
-            type: String,
-            required: true,
-        },
-        userId: {
-            type: String,
-            required: true,
-        },
-        fee: {
-            type: Number,
-        },
-    },
-    { timestamps: true }
-);
+//schema for team members
+const teamMemberSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    session: { type: String, required: true },
+    branch: { type: String, required: true }
+});
 
 
+const teamFormSchema = new mongoose.Schema({
+    eventId: { type: String, required: true },
+    userId: { type: String, required: true },
+    teamName: { type: String, required: true },
+    leaderName: { type: String, required: true },
+    email: { type: String, required: true },
+    mobileNo: { type: String, required: true },
+    altMobileNo: { type: String },
+    college: { type: String, required: true },
+    fee: { type: Number, required: true },
+    teamMembers: [teamMemberSchema]
+}, { timestamps: true });
 
-export const SingleForm = mongoose.models?.SingleForm || mongoose.model("SingleForm", singleFormSchema);
+
+export const TeamForm = mongoose.models?.TeamForm || mongoose.model("TeamForm", teamFormSchema);

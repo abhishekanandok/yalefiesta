@@ -1,17 +1,17 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { SingleForm } from "../models/singleForm";
+import { TeamForm } from "../models/teamForm";
 import { connectToDb } from "./connectToDb";
 
 
 
-export const addSingleForm = async (prevState, formData) => {
+export const addTeamForm = async (prevState, formData) => {
     try {
         connectToDb();
-        const newSingleForm = new SingleForm(formData);
+        const newTeamForm = new TeamForm(formData);
 
-        await newSingleForm.save();
+        await newTeamForm.save();
         console.log("saved to db");
         return { success: true };
 
