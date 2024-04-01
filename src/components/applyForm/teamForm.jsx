@@ -218,6 +218,9 @@ const SingleForm = ({ event, userData }) => {
                                 />
                                 <div>
                                     <Label>Member Details:-</Label>
+                                    <FormDescription>
+                                        Include leader name also.
+                                    </FormDescription>
                                     {fields.map((member, index) => (
                                         <div className=' flex gap-2' key={member.id}>
                                             <FormField
