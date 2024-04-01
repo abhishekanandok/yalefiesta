@@ -46,19 +46,31 @@ const FormSchema = z.object({
     mobileNo: z.string().min(10, 'Mobile number must be 10 digits').max(10, 'Mobile number must be 10 digits'),
     altMobileNo: z.string().optional(),
     college: z.string().min(3, 'college name required').max(100),
+    otherCollege: z.string().optional(),
     fee: z.number().nonnegative(),
     teamMembers: z.array(z.object({
         name: z.string().min(1, 'Name is required'),
         session: z.string().min(1, 'Session is required'),
         branch: z.string().min(1, 'Branch is required'),
     })),
-});
+}).refine(
+    (data) => {
+        if (data.college === "other") {
+            return !!data.otherCollege;
+        }
+        return true;
+    },
+    {
+        message: "College name is required",
+        path: ["otherCollege"],
+    }
+);
 
 
 
 
 
-const SingleForm = ({ event, userData }) => {
+const TeamForm = ({ event, userData }) => {
     const form = useForm({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -70,10 +82,13 @@ const SingleForm = ({ event, userData }) => {
             mobileNo: '',
             altMobileNo: '',
             college: '',
+            otherCollege: '',
             fee: 0,
             teamMembers: [{ name: '', session: '', branch: '' }],
         },
     });
+
+    const college = form.watch("college");
 
     const { control } = form;
     const { fields, append, remove } = useFieldArray({
@@ -267,6 +282,8 @@ const SingleForm = ({ event, userData }) => {
                                     ))}
                                     <Button className=' mt-2 ml-2' size="sm" type="button" onClick={addMember}><IoPersonAddOutline /> Add</Button>
                                 </div>
+
+
                                 <FormField
                                     control={form.control}
                                     name="college"
@@ -281,23 +298,40 @@ const SingleForm = ({ event, userData }) => {
                                                 </FormControl>
                                                 <SelectContent>
                                                     <SelectItem value="PURNEA COLLEGE OF ENGINEERING, PURNEA">PURNEA COLLEGE OF ENGINEERING, PURNEA</SelectItem>
-                                                    <SelectItem value="SITAMARHI INSTITUTE OF TECHNOLOGY, SITAMARHI">SITAMARHI INSTITUTE OF TECHNOLOGY, SITAMARHI</SelectItem>
-                                                    <SelectItem value=" BAKHTIYARPUR COLLEGE OF ENGINEERING, PATNA"> BAKHTIYARPUR COLLEGE OF ENGINEERING, PATNA</SelectItem>
+                                                    <SelectItem value="BAKHTIYARPUR COLLEGE OF ENGINEERING, PATNA">BAKHTIYARPUR COLLEGE OF ENGINEERING, PATNA</SelectItem>
                                                     <SelectItem value="SUPAUL COLLEGE OF ENGINEERING, SUPAUL">SUPAUL COLLEGE OF ENGINEERING, SUPAUL</SelectItem>
-                                                    <SelectItem value="RASHTRAKAVI RAMDHARI SINGH DINKAR COLLEGE OF ENGINEERING, BEGUSARAI">RASHTRAKAVI RAMDHARI SINGH DINKAR COLLEGE OF ENGINEERING, BEGUSARAI</SelectItem>
-                                                    <SelectItem value="SERSHAH ENGINEERING COLLEGE, SASARAM, ROHTAS">SERSHAH ENGINEERING COLLEGE, SASARAM, ROHTAS</SelectItem>
-                                                    <SelectItem value="LOK NAYAK JAI PRAKASH INSTITUTE OF TECHNOLOGY, CHAPRA">LOK NAYAK JAI PRAKASH INSTITUTE OF TECHNOLOGY, CHAPRA</SelectItem>
-                                                    <SelectItem value="MOTIHARI COLLEGE OF ENGINEERING, MOTIHARI">MOTIHARI COLLEGE OF ENGINEERING, MOTIHARI</SelectItem>
-                                                    <SelectItem value="DARBHANGA COLLEGE OF ENGINEERING, DARBHANGA">DARBHANGA COLLEGE OF ENGINEERING, DARBHANGA</SelectItem>
-                                                    <SelectItem value="GAYA COLLEGE OF ENGINEERING, GAYA">GAYA COLLEGE OF ENGINEERING, GAYA</SelectItem>
                                                     <SelectItem value="BHAGALPUR COLLEGE OF ENGINEERING, BHAGALPUR">BHAGALPUR COLLEGE OF ENGINEERING, BHAGALPUR</SelectItem>
+                                                    <SelectItem value="DARBHANGA COLLEGE OF ENGINEERING, DARBHANGA">DARBHANGA COLLEGE OF ENGINEERING, DARBHANGA</SelectItem>
+                                                    <SelectItem value="B. P. MANDAL COLLEGE OF ENGINEERING, MADHEPURA">B. P. MANDAL COLLEGE OF ENGINEERING, MADHEPURA</SelectItem>
+                                                    <SelectItem value="GAYA COLLEGE OF ENGINEERING, GAYA">GAYA COLLEGE OF ENGINEERING, GAYA</SelectItem>
+                                                    <SelectItem value="KATIHAR ENGINEERING COLLEGE, KATIHAR">KATIHAR ENGINEERING COLLEGE, KATIHAR</SelectItem>
+                                                    <SelectItem value="SAHARSA COLLEGE OF ENGINEERING, SAHARSA">SAHARSA COLLEGE OF ENGINEERING, SAHARSA</SelectItem>
                                                     <SelectItem value="other">Other</SelectItem>
+
+
                                                 </SelectContent>
                                             </Select>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
+                                {college === "other" && (
+                                    <FormField
+                                        control={form.control}
+                                        name="otherCollege"
+                                        render={({ field }) => {
+                                            return (
+                                                <FormItem>
+                                                    <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">College name</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="College full name" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            );
+                                        }}
+                                    />
+                                )}
                                 <FormField
                                     control={form.control}
                                     name='fee'
@@ -323,4 +357,4 @@ const SingleForm = ({ event, userData }) => {
     )
 }
 
-export default SingleForm;
+export default TeamForm;

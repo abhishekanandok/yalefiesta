@@ -17,6 +17,9 @@ const teamFormSchema = new mongoose.Schema({
     mobileNo: { type: String, required: true },
     altMobileNo: { type: String },
     college: { type: String, required: true },
+    otherCollege: {
+        type: String,
+    },
     fee: { type: Number, required: true },
     teamMembers: [teamMemberSchema]
 }, { timestamps: true });

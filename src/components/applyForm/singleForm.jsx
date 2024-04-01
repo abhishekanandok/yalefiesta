@@ -41,10 +41,22 @@ const FormSchema = z
         email: z.string().min(1, 'Email is required').email('Invalid email'),
         mobileNo: z.string().min(10, 'give correct number').max(10, 'give correct number'),
         college: z.string().min(3).max(100),
+        otherCollege: z.string().optional(),
         session: z.string().min(1, 'session is required').max(20, 'put in correct formate'),
         branch: z.string().min(1).max(100),
         fee: z.number().nonnegative(),
-    });
+    }).refine(
+        (data) => {
+            if (data.college === "other") {
+                return !!data.otherCollege;
+            }
+            return true;
+        },
+        {
+            message: "College name is required",
+            path: ["otherCollege"],
+        }
+    );
 
 
 
@@ -59,13 +71,16 @@ const SingleForm = ({ event, userData }) => {
             email: userData.email,
             mobileNo: '',
             college: '',
+            otherCollege: '',
             session: '',
             branch: '',
             fee: 0,
         },
     });
 
-    
+    const college = form.watch("college");
+
+
     const [state, formAction] = useFormState(addSingleForm, undefined);
 
     const router = useRouter();
@@ -207,25 +222,40 @@ const SingleForm = ({ event, userData }) => {
                                                 </FormControl>
                                                 <SelectContent>
                                                     <SelectItem value="PURNEA COLLEGE OF ENGINEERING, PURNEA">PURNEA COLLEGE OF ENGINEERING, PURNEA</SelectItem>
-                                                    <SelectItem value="SITAMARHI INSTITUTE OF TECHNOLOGY, SITAMARHI">SITAMARHI INSTITUTE OF TECHNOLOGY, SITAMARHI</SelectItem>
-                                                    <SelectItem value=" BAKHTIYARPUR COLLEGE OF ENGINEERING, PATNA"> BAKHTIYARPUR COLLEGE OF ENGINEERING, PATNA</SelectItem>
+                                                    <SelectItem value="BAKHTIYARPUR COLLEGE OF ENGINEERING, PATNA">BAKHTIYARPUR COLLEGE OF ENGINEERING, PATNA</SelectItem>
                                                     <SelectItem value="SUPAUL COLLEGE OF ENGINEERING, SUPAUL">SUPAUL COLLEGE OF ENGINEERING, SUPAUL</SelectItem>
-                                                    <SelectItem value="RASHTRAKAVI RAMDHARI SINGH DINKAR COLLEGE OF ENGINEERING, BEGUSARAI">RASHTRAKAVI RAMDHARI SINGH DINKAR COLLEGE OF ENGINEERING, BEGUSARAI</SelectItem>
-                                                    <SelectItem value="SERSHAH ENGINEERING COLLEGE, SASARAM, ROHTAS">SERSHAH ENGINEERING COLLEGE, SASARAM, ROHTAS</SelectItem>
-                                                    <SelectItem value="LOK NAYAK JAI PRAKASH INSTITUTE OF TECHNOLOGY, CHAPRA">LOK NAYAK JAI PRAKASH INSTITUTE OF TECHNOLOGY, CHAPRA</SelectItem>
-                                                    <SelectItem value="MOTIHARI COLLEGE OF ENGINEERING, MOTIHARI">MOTIHARI COLLEGE OF ENGINEERING, MOTIHARI</SelectItem>
-                                                    <SelectItem value="DARBHANGA COLLEGE OF ENGINEERING, DARBHANGA">DARBHANGA COLLEGE OF ENGINEERING, DARBHANGA</SelectItem>
-                                                    <SelectItem value="GAYA COLLEGE OF ENGINEERING, GAYA">GAYA COLLEGE OF ENGINEERING, GAYA</SelectItem>
                                                     <SelectItem value="BHAGALPUR COLLEGE OF ENGINEERING, BHAGALPUR">BHAGALPUR COLLEGE OF ENGINEERING, BHAGALPUR</SelectItem>
+                                                    <SelectItem value="DARBHANGA COLLEGE OF ENGINEERING, DARBHANGA">DARBHANGA COLLEGE OF ENGINEERING, DARBHANGA</SelectItem>
+                                                    <SelectItem value="B. P. MANDAL COLLEGE OF ENGINEERING, MADHEPURA">B. P. MANDAL COLLEGE OF ENGINEERING, MADHEPURA</SelectItem>
+                                                    <SelectItem value="GAYA COLLEGE OF ENGINEERING, GAYA">GAYA COLLEGE OF ENGINEERING, GAYA</SelectItem>
+                                                    <SelectItem value="KATIHAR ENGINEERING COLLEGE, KATIHAR">KATIHAR ENGINEERING COLLEGE, KATIHAR</SelectItem>
+                                                    <SelectItem value="SAHARSA COLLEGE OF ENGINEERING, SAHARSA">SAHARSA COLLEGE OF ENGINEERING, SAHARSA</SelectItem>
                                                     <SelectItem value="other">Other</SelectItem>
-                                        
-                                                    
+
+
                                                 </SelectContent>
                                             </Select>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
+                                {college === "other" && (
+                                    <FormField
+                                        control={form.control}
+                                        name="otherCollege"
+                                        render={({ field }) => {
+                                            return (
+                                                <FormItem>
+                                                    <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">College name</FormLabel>
+                                                    <FormControl>
+                                                        <Input placeholder="College full name" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            );
+                                        }}
+                                    />
+                                )}
 
                                 {/* Session */}
                                 <FormField

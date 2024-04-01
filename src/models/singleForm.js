@@ -22,6 +22,9 @@ const singleFormSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        otherCollege: {
+            type: String,
+        },
         session: {
             type: String,
             required: true,
