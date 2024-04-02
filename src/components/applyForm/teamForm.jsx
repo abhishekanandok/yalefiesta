@@ -291,7 +291,7 @@ const TeamForm = ({ event, userData }) => {
                                         <FormItem>
                                             <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">College</FormLabel>
                                             <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <FormControl>
+                                                <FormControl className=' bg-white'>
                                                     <SelectTrigger>
                                                         <SelectValue placeholder="Select a College" />
                                                     </SelectTrigger>
@@ -323,7 +323,7 @@ const TeamForm = ({ event, userData }) => {
                                             return (
                                                 <FormItem>
                                                     <FormLabel className=" after:content-['*'] after:ml-0.5 after:text-red-500">College name</FormLabel>
-                                                    <FormControl>
+                                                    <FormControl className=' bg-white'>
                                                         <Input placeholder="College full name" {...field} />
                                                     </FormControl>
                                                     <FormMessage />
