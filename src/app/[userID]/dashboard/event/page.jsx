@@ -63,7 +63,7 @@ const FormSchema = z
 
 
 
-const createEvent = () => {
+const CreateEvent = () => {
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -392,4 +392,4 @@ const createEvent = () => {
   )
 }
 
-export default createEvent;
+export default CreateEvent;

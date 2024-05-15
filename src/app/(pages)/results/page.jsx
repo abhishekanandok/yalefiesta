@@ -1,6 +1,5 @@
 import React from "react";
 
-// Assuming the components are imported correctly in the project
 const {
   Table,
   TableBody,
@@ -121,4 +120,4 @@ function TableDemo() {
   );
 }
 
-module.exports = TableDemo;
+export default TableDemo;

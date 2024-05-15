@@ -130,7 +130,7 @@ const SignInForm = () => {
             <GoogleSignInButton><FaGithub className="h-5 w-5 mr-2" />Github</GoogleSignInButton>
           </div>
           <p className='text-center text-sm text-gray-600 mt-4'>
-            If you don't have an account, please&nbsp;
+            If you don&apost have an account, please&nbsp;
             <Link className='text-blue-500 hover:underline font-bold' href='/signup'>
               Sign up
             </Link>
