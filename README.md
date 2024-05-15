@@ -1,5 +1,8 @@
 ![image](https://github.com/abhishekanandok/yalefiesta/assets/112304737/adf98755-a780-4664-98d4-48a9466ef385)
 
+![image](https://github.com/abhishekanandok/yalefiesta/assets/112304737/bfe06e9a-30e2-40f0-b95e-d75817695d40)
+
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
