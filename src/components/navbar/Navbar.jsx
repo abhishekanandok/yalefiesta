@@ -1,4 +1,4 @@
-import NavbarLinks from "./links/Links"
+import NavbarLinks from "./Links/Links"
 import { auth } from "@/lib/auth";
 import { getUser } from "@/lib/data";
 
