@@ -37,6 +37,9 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { RxDashboard } from "react-icons/rx";
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons';
 
+import SuprSendInbox from '@suprsend/react-inbox'
+import 'react-toastify/dist/ReactToastify.css' // needed for toast notifications, can be ignored if hideToast=true
+
 
 
 
@@ -104,12 +107,12 @@ ListItem.displayName = 'ListItem';
 
 
 
-const NavbarLinks =  ({session, userData}) => {
+const NavbarLinks = ({ session, userData }) => {
 
-//   console.log(userData);
-//   console.log(userData.username);
+  //   console.log(userData);
+  //   console.log(userData.username);
 
-  return  (
+  return (
     <nav className="pt-2 pb-2 text-indigo-800 sticky top-0 bg-white flex space-x-4 pl-44 pr-44 items-center font-bold">
 
       {/* logo and name */}
@@ -209,6 +212,16 @@ const NavbarLinks =  ({session, userData}) => {
         </NavigationMenu>
       </div>
 
+      {/* notification */}
+      <div>
+        <SuprSendInbox
+          workspaceKey={process.env.NEXT_PUBLIC_SUPRSEND_WORKSPACE_KEY}
+          subscriberId="<subscriber_id>"
+          distinctId="abhishekanandok@gmail.com"
+        />
+      </div>
+
+
       {/* dark theme button */}
       <div>
         <ModeToggle />
@@ -216,70 +229,70 @@ const NavbarLinks =  ({session, userData}) => {
 
 
       {/* profile section */}
-      
 
-        {session?.user ? (
-          <div>
-            <DropdownMenu>
 
-              <DropdownMenuTrigger><Avatar>
-                <AvatarImage src={userData.img || "/noAvatar.png"} alt="user_image" />
-                <AvatarFallback>Hi</AvatarFallback>
-              </Avatar></DropdownMenuTrigger>
+      {session?.user ? (
+        <div>
+          <DropdownMenu>
 
-              <DropdownMenuContent className="w-52">
-                <DropdownMenuLabel><span className=' font-light'>Hi,</span> {userData.firstName} {userData.lastName}</DropdownMenuLabel>
+            <DropdownMenuTrigger><Avatar>
+              <AvatarImage src={userData.img || "/noAvatar.png"} alt="user_image" />
+              <AvatarFallback>Hi</AvatarFallback>
+            </Avatar></DropdownMenuTrigger>
 
-                <DropdownMenuSeparator />
+            <DropdownMenuContent className="w-52">
+              <DropdownMenuLabel><span className=' font-light'>Hi,</span> {userData.firstName} {userData.lastName}</DropdownMenuLabel>
 
-                <DropdownMenuGroup>
+              <DropdownMenuSeparator />
 
-                  <Link href={`/${userData.username}/profile`}>
+              <DropdownMenuGroup>
+
+                <Link href={`/${userData.username}/profile`}>
                   <DropdownMenuItem className=' cursor-pointer'>
-                  <CgProfile className="mr-2 h-4 w-4" />Profile
+                    <CgProfile className="mr-2 h-4 w-4" />Profile
                     <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                   </DropdownMenuItem>
-                  </Link>
+                </Link>
 
-                  <Link href={`/${userData.username}/dashboard`}>
+                <Link href={`/${userData.username}/dashboard`}>
                   <DropdownMenuItem className=' cursor-pointer'>
                     <RxDashboard className="mr-2 h-4 w-4" />Dashboard
                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                   </DropdownMenuItem>
-                  </Link>
+                </Link>
 
-                  <Link href={`/${userData.username}/dashboard/setting`} >
+                <Link href={`/${userData.username}/dashboard/setting`} >
                   <DropdownMenuItem className=' cursor-pointer'>
-                  <IoSettingsOutline className="mr-2 h-4 w-4" />Settings
+                    <IoSettingsOutline className="mr-2 h-4 w-4" />Settings
                     <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                   </DropdownMenuItem>
-                  </Link>
-                </DropdownMenuGroup>
+                </Link>
+              </DropdownMenuGroup>
 
-                <DropdownMenuSeparator />
+              <DropdownMenuSeparator />
 
-                <form action={handleLogout}>
+              <form action={handleLogout}>
                 <DropdownMenuItem>
                   <Button variant="destructive"><IoMdLogOut className="mr-2 h-4 w-4" />Log out</Button>
                   <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
-                </form>
+              </form>
 
-              </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
 
-          </div>
-        ) : (
-          <div>
-            <Link href="/login">
-              <Button className=' font-bold'>Login</Button>
-            </Link>
-          </div>
-        )}
-        
+        </div>
+      ) : (
+        <div>
+          <Link href="/login">
+            <Button className=' font-bold'>Login</Button>
+          </Link>
+        </div>
+      )}
 
-      
+
+
 
     </nav>
   );
