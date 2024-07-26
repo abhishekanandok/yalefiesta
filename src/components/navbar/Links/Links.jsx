@@ -215,8 +215,8 @@ const NavbarLinks = ({ session, userData }) => {
       {/* notification */}
       <div>
         <SuprSendInbox
-          workspaceKey={process.env.NEXT_PUBLIC_SUPRSEND_WORKSPACE_KEY}
-          subscriberId="<subscriber_id>"
+          workspaceKey="xm5WpboKrNlhQrPQTtAD"
+          subscriberId="AUp3yKu_zln08mF8HXqr1aGf5yeTxKjV0WYNPKZxMD8"
           distinctId="abhishekanandok@gmail.com"
         />
       </div>
